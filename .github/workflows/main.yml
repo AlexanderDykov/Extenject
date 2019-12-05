@@ -1,0 +1,15 @@
+name: CI
+
+on:
+  push:
+    branches:    
+      - master
+
+jobs:
+  createPackage:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - run: git remote rm origin | exit 0
+    - run: git remote add origin https://AlexanderDykov:${{ secrets.GIT_PASSWORD }}@github.com/AlexanderDykov/Extenject.git
+    - run: git subtree push --prefix Assets/Plugins/Zenject origin upm
